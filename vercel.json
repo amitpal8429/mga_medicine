@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://24x7.medicalglobalacademy.com/api/:path*" },
+    { "source": "/((?!api/|assets/|.*\\..*).*)", "destination": "/index.html" }
+  ]
+}

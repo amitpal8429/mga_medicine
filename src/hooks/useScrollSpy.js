@@ -1,0 +1,20 @@
+import { useEffect, useState } from 'react';
+
+// Returns the id of the section currently under the sticky header.
+export default function useScrollSpy(ids, offset = 140) {
+  const [active, setActive] = useState(ids[0]);
+  useEffect(() => {
+    const onScroll = () => {
+      let current = ids[0];
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top - offset <= 0) current = id;
+      }
+      setActive(current);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [ids.join('|'), offset]);
+  return active;
+}
